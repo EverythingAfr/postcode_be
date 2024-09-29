@@ -11,15 +11,15 @@ const port = process.env.PORT || 3000;
 app.get('/proxy-api/autocomplete/:postcode', async (req, res) => {
   try {
     const postcode = encodeURIComponent(req.params.postcode);
-    const apiResponse = await axios.get(`https://api.woosmap.com/localities/autocomplete/?input=${postcode}&components=country%3Agb&no_deprecated_fields=true&key=${process.env.APIKEY}`, {
+    const apiResponse = await axios.get(`https://api.woosmap.com/localities/autocomplete/?key=${process.env.APIKEY}&input=${postcode}`, {
       headers: { 
         'Referer': process.env.REFERER || 'http://localhost'
       }
     });
     res.json(apiResponse.data);
   } catch (error) {
-    console.error('Error in /proxy-api/autocomplete:', error.message);
-    res.status(error.response?.status || 500).json({ error: 'Error fetching data from third-party API' });
+    console.error('Error in /proxy-api/autocomplete:', error);
+    res.status(error.response?.status || 500).json({ error: error.response});
   }
 });
 
