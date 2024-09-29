@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 app.get('/proxy-api/autocomplete/:postcode', async (req, res) => {
   try {
     const postcode = encodeURIComponent(req.params.postcode);
-    const apiResponse = await axios.get(`https://api.woosmap.com/localities/autocomplete/?input=${postcode}&components=country:gb&no_deprecated_fields=true&key=${process.env.APIKEY}`, {
+    const apiResponse = await axios.get(`https://api.woosmap.com/localities/autocomplete/?input=${postcode}&key=${process.env.APIKEY}`, {
       headers: { 
         'Referer': process.env.REFERER || 'http://localhost'
       }
