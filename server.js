@@ -18,7 +18,7 @@ app.get('/proxy-api/autocomplete/:postcode', async (req, res) => {
     });
     res.json(apiResponse.data);
   } catch (error) {
-    console.error('Error in /proxy-api/autocomplete:', error);
+    console.error('Error in /proxy-api/autocomplete:', error.message);
     res.status(error.response?.status || 500).json({ error: error.response});
   }
 });
